@@ -4,9 +4,14 @@ import { Especialidade } from "./src/types/especialidade";
 import { Paciente } from "./src/types/paciente";
 import { Medico } from "./src/interfaces/medico";
 import { Consulta } from "./src/interfaces/consulta";
+import { useFonts, DMSans_400Regular } from '@expo-google-fonts/dm-sans';
 import { useState } from 'react';
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    DMSans_400Regular,
+  });
+
   const cardiologia: Especialidade = {
     id: 1,
     nome: "Cardiologia",
@@ -155,7 +160,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#79059C",
+    backgroundColor: "#5ea9ff",
   },
   scrollContent: {
     padding: 20,
@@ -170,11 +175,13 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#fff",
     marginBottom: 8,
+    fontFamily: 'DMSans_400Regular',
   },
   subtitulo: {
     fontSize: 18,
     color: "#fff",
     opacity: 0.9,
+    fontFamily: 'DMSans_400Regular',
   },
   card: {
     backgroundColor: "#fff",
@@ -201,6 +208,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#F44336",
   },
   statusTexto: {
+    fontFamily: 'DMSans_400Regular',
     color: "#fff",
     fontWeight: "bold",
     fontSize: 12,
@@ -212,22 +220,26 @@ const styles = StyleSheet.create({
     borderBottomColor: "#e0e0e0",
   },
   label: {
+    fontFamily: 'DMSans_400Regular',
     fontSize: 16,
     fontWeight: "bold",
-    color: "#79059C",
+    color: "#0060b9",
     marginBottom: 8,
   },
   valor: {
+    fontFamily: 'DMSans_400Regular',
     fontSize: 18,
     color: "#333",
     marginBottom: 4,
   },
   info: {
+    fontFamily: 'DMSans_400Regular',
     fontSize: 14,
     color: "#666",
     marginBottom: 2,
   },
   observacoes: {
+    fontFamily: 'DMSans_400Regular',
     fontSize: 14,
     color: "#555",
     fontStyle: "italic",
@@ -245,6 +257,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderLeftWidth: 4,
     borderLeftColor: "#4CAF50",
+    fontFamily: 'DMSans_400Regular',
   },
   mensagemCancelada: {
     backgroundColor: "#FFEBEE",
@@ -252,8 +265,10 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderLeftWidth: 4,
     borderLeftColor: "#F44336",
+    fontFamily: 'DMSans_400Regular',
   },
   mensagemTexto: {
+    fontFamily: 'DMSans_400Regular',
     fontSize: 16,
     color: "#333",
     fontWeight: "600",
@@ -266,6 +281,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   rodapeTexto: {
+    fontFamily: 'DMSans_400Regular',
     fontSize: 12,
     color: "#fff",
     textAlign: "center",
