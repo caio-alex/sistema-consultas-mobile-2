@@ -56,41 +56,52 @@ class ConsultasService {
   /**
   * Obtém uma consulta específica por ID
   */
-  async obterConsulta(
-    id: number,
-    usuarioId?: number,
-    isAdmin: boolean = false
-  ): Promise<Consulta> {
-    const todasConsultas = await this.obterTodasConsultas();
-    const consulta = todasConsultas.find((c) => c.id === id);
+  // ...existing code...
+async obterConsulta(
+  id: number,
+  usuarioId?: number,
+  isAdmin: boolean = false
+): Promise<Consulta> {
+  const todasConsultas = await this.obterTodasConsultas();
+  const consulta = todasConsultas.find((c) => c.id === id);
 
-    if (!consulta) {
-      throw new Error("Consulta não encontrada");
-    }
+  if (!consulta) {
+    throw new Error("Consulta não encontrada");
+  }
 
-    if (!isAdmin && consulta.usuarioId !== usuarioId) {
-      throw new Error("Você não tem permissão para visualizar esta consulta");
-    }
-
+  // Se for admin, retorna direto
+  if (isAdmin) {
     return consulta;
   }
 
+  // Se não for admin, exige autenticação e ser dono da consulta
+  if (usuarioId == null) {
+    throw new Error("Usuário não autenticado");
+  }
+
+  if (consulta.usuarioId !== usuarioId) {
+    throw new Error("Você não tem permissão para visualizar esta consulta");
+  }
+
+  return consulta;
+}
+// ...existing code...
   /**
   * Cria uma nova consulta associada ao usuário logado
   */
-  async criarConsulta(consultaData: Omit<Consulta, "id">): Promise<Consulta> {
-    const todasConsultas = await this.obterTodasConsultas();
+async criarConsulta(consultaData: Omit<Consulta, "id">): Promise<Consulta> {
+  const todasConsultas = await this.obterTodasConsultas();
 
-    const novaConsulta: Consulta = {
-      ...consultaData,
-      id: Date.now(), // Usa timestamp como ID único
-    };
+  const novaConsulta: Consulta = {
+    ...consultaData,
+    id: Date.now(), // Usa timestamp como ID único
+  };
 
-    todasConsultas.push(novaConsulta);
-    await this.salvarConsultas(todasConsultas);
+  todasConsultas.push(novaConsulta);
+  await this.salvarConsultas(todasConsultas);
 
-    return novaConsulta;
-  }
+  return novaConsulta;
+}
 
   /**
   * Confirma uma consulta (muda status de "agendada" para "confirmada")
